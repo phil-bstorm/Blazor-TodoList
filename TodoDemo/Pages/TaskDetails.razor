@@ -1,9 +1,30 @@
 ﻿@* Ce ci gere la gestion des parametres *@
 @page "/tasks/{id:int}"
 
+@using TodoDemo.Models
+@using TodoDemo.Services
+@inject TaskService TaskService
+
 <h3>TaskDetails @Id</h3>
+
+@if (TaskTodo is not null)
+{
+    <p>@TaskTodo.Title</p>
+    <p>@TaskTodo.Description</p>
+}
+else
+{
+    <p>Loading...</p>
+}
 
 @code {
     [Parameter]
     public int Id { get; set; }
+
+    public TaskTodo? TaskTodo { get; set; } = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        TaskTodo = await TaskService.GetTaskById(Id);
+    }
 }

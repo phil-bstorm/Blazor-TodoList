@@ -3,24 +3,33 @@
 <PageTitle>Tasks!</PageTitle>
 
 <h3>Tasks</h3>
-<p>Tâches à faire:</p>
-<ul>
-    @foreach (var item in TaskList)
-    {
-        @if (!item.IsCompleted)
-        {
-            <li class="green">@item.Id - @item.Title <input type="checkbox" @bind="@item.IsCompleted" /> <button @onclick="(() => DeleteTask(item))">❌</button></li>
-        }
-    }
-</ul>
 
-<p>Tâches à Finie:</p>
-<ul>
-    @foreach (var item in TaskList)
-    {
-        @if (item.IsCompleted)
+@if (TaskList is not null)
+{
+    <p>Todo:</p>
+
+    <ul>
+        @foreach (var item in TaskList ?? [])
         {
-            <li class="red">@item.Id - @item.Title <input type="checkbox" @bind="@item.IsCompleted" /></li>
+            @if (!item.IsCompleted)
+            {
+                <li class="green">@item.Id - <NavLink href="@($"/tasks/{item.Id}")">@item.Title</NavLink> <input type="checkbox" @bind="@item.IsCompleted" /> <button @onclick="(() => DeleteTask(item))">❌</button></li>
+            }
         }
-    }
-</ul>
+    </ul>
+
+    <p>Done:</p>
+    <ul>
+        @foreach (var item in TaskList!) @*Impossible que TaskList soit null car condition plus haut*@
+        {
+            @if (item.IsCompleted)
+            {
+                <li class="red">@item.Id - @item.Title <input type="checkbox" @bind="@item.IsCompleted" /></li>
+            }
+        }
+    </ul>
+}
+else
+{
+    <p>Loading...</p>
+}

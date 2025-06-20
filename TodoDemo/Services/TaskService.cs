@@ -15,5 +15,23 @@ namespace TodoDemo.Services
         {
             TaskList.Remove(t);
         }
+
+        public Task<List<TaskTodo>> GetTask() {
+            return Task.FromResult(TaskList); // plus tard, ça sera un HttpClient
+        }
+
+        public Task<TaskTodo?> GetTaskById(int id) {
+            TaskTodo? t = TaskList.FirstOrDefault(t => t.Id == id);
+            return Task.FromResult(t);
+        }
+
+        public Task<bool> Create(TaskTodo t) {
+            if (t.Id == 0)
+            {
+                t.Id = TaskList.Count + 1; // pas très propre, mais ça marche
+            }
+            TaskList.Add(t);
+            return Task.FromResult(true);
+        }
     }
 }

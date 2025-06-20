@@ -1,0 +1,16 @@
+﻿@page "/task/create"
+
+<h3>TaskCreate</h3>
+
+<EditForm Model="@Model" OnValidSubmit="OnSubmit">
+    <DataAnnotationsValidator />
+
+    <InputText type="text" @bind-Value="Model.Title"></InputText>
+    <ValidationMessage For="@(() => Model.Title)" />
+
+    <InputText type="text" @bind-Value="Model.Description"></InputText>
+    <ValidationMessage For="@(() => Model.Description)" />
+
+    <button type="submit">Creer la tache!</button>
+</EditForm>
+
