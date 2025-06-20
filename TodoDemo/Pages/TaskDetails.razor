@@ -1,0 +1,9 @@
+﻿@* Ce ci gere la gestion des parametres *@
+@page "/tasks/{id:int}"
+
+<h3>TaskDetails @Id</h3>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+}

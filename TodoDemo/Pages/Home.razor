@@ -1,0 +1,20 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world! @Message</h1>
+
+<p>On peut faire des calcules! @(2+2)</p>
+
+<p>On peut executer des fonctions! @DisBonjour()</p>
+
+<p>Pour écrire "@@" dans la page, il faut le doublé!</p>
+
+@code {
+    public string Message { get; set; } = "Bienvenu dans la todo list!";
+
+    public string DisBonjour()
+    {
+        return "Bonjour!";    
+    }
+}
